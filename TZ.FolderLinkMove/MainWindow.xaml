@@ -1,0 +1,93 @@
+﻿<mah:MetroWindow x:Class="TZ.FolderLinkMove.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TZ.FolderLinkMove"
+        mc:Ignorable="d"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"                 
+      xmlns:simpleChildWindow="clr-namespace:MahApps.Metro.SimpleChildWindow;assembly=MahApps.Metro.SimpleChildWindow"
+        Title="TZ文件夹链接转移程序" Height="360" Width="600" ResizeMode="CanMinimize">
+    <Grid>
+    <simpleChildWindow:ChildWindow
+                                           ShowTitleBar="False"
+                                           Title=""
+                                           Padding="0"
+                                           HorizontalContentAlignment="Stretch"
+                                           VerticalContentAlignment="Stretch"
+                                           CloseByEscape="False"
+                                           IsAutoCloseEnabled="False"
+                                           IsOpen="False"
+                                            ChildWindowHeight="300"
+                                            ChildWindowWidth="300"
+                                            Background="Transparent"
+        x:Name="loadingBar"
+            >
+        <simpleChildWindow:ChildWindow.OverlayBrush>
+            <SolidColorBrush Opacity="0.1" Color="Gray" />
+        </simpleChildWindow:ChildWindow.OverlayBrush>
+            <mah:ProgressRing Foreground="LightSkyBlue" IsActive="True" Height="80" Width="80"/>
+    </simpleChildWindow:ChildWindow>
+    <Grid>
+        <!--网格列-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--网格行-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <StackPanel  Grid.Row="0"  Orientation="Vertical"  Margin="10,5,5,0">
+            <StackPanel   Orientation="Vertical">
+                    <TextBlock FontSize="18" FontWeight="Bold">TZ.FolderLinkMove</TextBlock>
+                <TextBlock FontSize="16" FontWeight="Bold" Margin="10,5,5,0">使用场景</TextBlock>
+            </StackPanel>
+            <StackPanel   Orientation="Vertical">
+                <TextBlock TextWrapping="Wrap" Width="570">
+                    1. C盘安装的程序转移（如微信、PostMan等安装在C盘的AppData\Local目录下）到其他磁盘不破坏之前的程序及快捷方式
+                </TextBlock>
+                <TextBlock TextWrapping="Wrap" Width="570">
+                    2. 部分程序的缓存目录为C盘（如Chrome等浏览器缓存、Visual Studio 2017及以上在线安装的缓存文件），转移到其他盘
+                </TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel  Grid.Row="1" Orientation="Vertical" Margin="10,10,5,0">
+            <StackPanel   Orientation="Horizontal">
+                <TextBlock FontSize="16" FontWeight="Bold">1. 选择要转移的文件夹</TextBlock>                
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" >
+                <Label FontWeight="Bold" Width="80">把文件夹从</Label>
+                <TextBox Width="400" Name="txt_SourceDirPath"></TextBox>
+                <Button Margin="10,0" Name="btn_SourceDir" Click="btn_SourceDir_Click">选择文件夹</Button>
+            </StackPanel>
+            <StackPanel   Orientation="Horizontal">
+                <TextBlock FontSize="16" FontWeight="Bold">2. 选择目标文件夹</TextBlock>                
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" >
+                <Label FontWeight="Bold" Width="80">转移到文件夹</Label>
+                <TextBox Width="400" Name="txt_TargetDirPath"></TextBox>
+                <Button Margin="10,0" Name="btn_TargetDir" Click="btn_TargetDir_Click">选择文件夹</Button>
+            </StackPanel>
+            <StackPanel   Orientation="Horizontal">
+                <TextBlock FontSize="16" FontWeight="Bold">3. 选择连接方式</TextBlock>                
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" >
+                <Label FontWeight="Bold" Width="80">连接方式</Label>
+                <ComboBox Width="300" Name="cbx_Type">
+                    <ComboBoxItem IsSelected="True">符号链接(默认)</ComboBoxItem>
+                    <ComboBoxItem>目录连接</ComboBoxItem>
+                </ComboBox>
+                <Button Margin="60,0" Name="btn_MoveFolder" Click="btn_MoveFolder_Click">移动文件夹并设置连接</Button>
+            </StackPanel>
+        </StackPanel>
+        <StatusBar Grid.Row="2" >
+            <StatusBarItem FontFamily="Arial" FontSize="12" Foreground="White"/>
+        </StatusBar>
+        <StatusBar Grid.Row="2" HorizontalAlignment="Right" Margin="0,0,10,0" Background="Transparent">
+                <StatusBarItem Content="author : tyz" FontFamily="Arial" FontSize="12" Foreground="White" />
+        </StatusBar>
+    </Grid>
+    </Grid>
+</mah:MetroWindow>
